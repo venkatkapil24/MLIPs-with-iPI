@@ -1,6 +1,6 @@
 <simulation verbosity='high'>
   <output prefix='simulation'>
-    <properties filename='out' stride='1'>  [ step, time{picosecond}, conserved{electronvolt}, temperature{kelvin}, kinetic_cv{electronvolt}, potential{electronvolt}, pressure_cv{megapascal} ] </properties>
+    <properties filename='out' stride='200'>  [ step, time{picosecond}, conserved{electronvolt}, temperature{kelvin}, kinetic_md{electronvolt}, potential{electronvolt}, pressure_md{megapascal} ] </properties>
     <trajectory filename='pos' stride='200' format='ase'> positions </trajectory>
     <checkpoint stride='2000'/>
   </output>
@@ -11,23 +11,47 @@
   <ffsocket name='driver' mode='unix' pbc='False'>
       <address> driver </address>
   </ffsocket>
-  <system>
-    <initialize nbeads='1'>
-      <file mode='ase'> init.xyz </file>
-      <velocities mode='thermal' units='kelvin'> 300 </velocities>
-    </initialize>
-    <forces>
-      <force forcefield='driver'> </force>
-    </forces>
-    <motion mode='dynamics'>
-      <dynamics mode='nve'>
-        <!-- Change as per your system  --> 
-        <timestep units='femtosecond'> 0.50 </timestep>
-      </dynamics>
-    </motion>
-    <ensemble>
-      <!-- Need to specify it as the path-integral Hamiltonian is temperature dependent  --> 
-      <temperature units='kelvin'> 300 </temperature>
-    </ensemble>
-  </system>
+  <system_template>
+      <!-- Here you are essentially defining the template for each system. In this case, different systems differ with respect to the temperature of the thermostat attached to them. Different prefixes allow to differentiate between the outputs of the systems. --> 
+     <labels>   [ IDX, TEMP ] </labels>
+     <instance> [  0,   260 ] </instance>
+     <instance> [  1,   280 ] </instance>
+     <instance> [  2,   300 ] </instance>
+     <instance> [  3,   320 ] </instance>
+     <instance> [  4,   340 ]  </instance>
+     <template>
+        <system prefix='IDX'>
+          <initialize nbeads='1'>
+            <file mode='ase'> init.xyz </file>
+            <velocities mode='thermal' units='kelvin'> TEMP </velocities>
+          </initialize>
+          <forces>
+            <force forcefield='driver'> </force>
+          </forces>
+	  <motion mode='dynamics'>
+            <dynamics mode='npt'>
+	      <barostat mode='flexible'>
+		      <tau units='femtosecond'> 100 </tau>
+	  	<thermostat mode='langevin'>
+		  <tau units='femtosecond'> 100 </tau>
+		</thermostat>
+	      </barostat>
+	      <thermostat mode='svr'>
+                <tau units='femtosecond'> 100 </tau>
+              </thermostat>	    
+	      <timestep units='femtosecond'> 0.50 </timestep>
+            </dynamics>
+          </motion>
+          <ensemble>
+            <temperature units='kelvin'> TEMP </temperature>
+          </ensemble>
+        </system>
+     </template>
+   </system_template>
+      <!-- smotion determines how different systems interact with each other. Here we specify replica exchange. It is helpful to try and swap every step. --> 
+   <smotion mode='remd'>
+      <remd>
+         <stride> 1 </stride>
+      </remd>
+   </smotion>
 </simulation>
