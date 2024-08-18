@@ -1,7 +1,7 @@
 <simulation verbosity='high'>
   <output prefix='simulation'>
     <!-- Select the properties and trajectories of your liking. If you want the same units as in ASE, just specify  {ase}. -->  
-    <properties filename='out' stride='200'>  [ step, time{picosecond}, conserved{electronvolt}, temperature{kelvin}, kinetic_cv{electronvolt}, potential{electronvolt}, pressure_cv{megapascal} ] </properties>
+    <properties filename='out' stride='200'>  [ step, time{picosecond}, conserved{electronvolt}, temperature{kelvin}, kinetic_md{electronvolt}, potential{electronvolt}, pressure_cv{megapascal} ] </properties>
     <trajectory filename='pos' stride='200' format='ase'> positions </trajectory>
     <checkpoint stride='2000'/>
   </output>
