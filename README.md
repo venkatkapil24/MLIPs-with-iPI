@@ -13,3 +13,30 @@ Here are a few examples of running basic simulations with i-PI v3.0. You are wel
 | `07-REMD-NVT`          | Replica exchange simulation at constant temperature.                                                        | Obtaining statistics for many temperatures, improving sampling efficiency.                  |
 | `08-REMD-NPT`          | Replica exchange simulation at constant temperature and pressure.                                           | Efficiently simulating an isobar.                                                           |
 
+
+## How to run
+
+Running simulations with i-PI is a two-step process. You will first need to run i-PI and then the force provider. 
+```bash
+i-pi input.xml &> log.i-pi &
+sleep 30
+python run-ase.py
+```
+For most simulations, you can reduce the sleep time to 10 seconds. However, a REMD simulation can require a longer time to set up. In these examples, ASE is the force provider, and I am using the (MACE-MP-0)[https://github.com/ACEsuit/mace-mp] potential. 
+
+Ensure you have sourced the `env.sh` file in the i-PI directory
+```bash
+source ${IPI_ROOT_DIRECTORY}/env.sh
+```
+
+and you have `ase` and `mace` available in your Python environment. If you don't have that, an easy way is to
+```bash
+pip install mace-torch
+```
+
+### Contact
+
+You are welcome to reach out to me at (v.kapil@ucl.ac.uk)[v.kapil@ucl.ac.uk] or raise an issue on GitHub if you encounter any problems. Feel free to suggest use cases not covered here. 
+
+
+
