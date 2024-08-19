@@ -25,7 +25,7 @@ python run-ase.py
 For most simulations, you can reduce the sleep time to 10 seconds. However, a REMD simulation can require a longer time to set up. In these examples, ASE is the force provider, and I am using the [MACE-MP-0](https://github.com/ACEsuit/mace-mp) potential. However, you can use any potential by replacing the calculator in the run-ase.py file. 
 
 ```python
-atoms.calc = mace_mp(device='cpu') # Replace this with your preferred calculator 
+atoms.calc = mace_mp() # Replace this with your preferred calculator 
 ```
 
 Check out [i-PI's README]() on installation instructions. If you want to install the last version
