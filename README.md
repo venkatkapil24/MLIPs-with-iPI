@@ -22,7 +22,7 @@ i-pi input.xml &> log.i-pi &
 sleep 30
 python run-ase.py
 ```
-For most simulations, you can reduce the sleep time to 10 seconds. However, a REMD simulation can require a longer time to set up. In these examples, ASE is the force provider, and I am using the (MACE-MP-0)[https://github.com/ACEsuit/mace-mp] potential. 
+For most simulations, you can reduce the sleep time to 10 seconds. However, a REMD simulation can require a longer time to set up. In these examples, ASE is the force provider, and I am using the [MACE-MP-0](https://github.com/ACEsuit/mace-mp) potential. 
 
 Ensure you have sourced the `env.sh` file in the i-PI directory
 ```bash
@@ -36,7 +36,7 @@ pip install mace-torch
 
 ### Contact
 
-You are welcome to reach out to me at (v.kapil@ucl.ac.uk)[v.kapil@ucl.ac.uk] or raise an issue on GitHub if you encounter any problems. Feel free to suggest use cases not covered here. 
+If you encounter any problems, you are welcome to contact me at [v.kapil@ucl.ac.uk](v.kapil@ucl.ac.uk) or raise an issue on GitHub. Feel free to suggest use cases that are not covered here. 
 
 
 
