@@ -22,12 +22,22 @@ i-pi input.xml &> log.i-pi &
 sleep 30
 python run-ase.py
 ```
-For most simulations, you can reduce the sleep time to 10 seconds. However, a REMD simulation can require a longer time to set up. In these examples, ASE is the force provider, and I am using the [MACE-MP-0](https://github.com/ACEsuit/mace-mp) potential. 
+For most simulations, you can reduce the sleep time to 10 seconds. However, a REMD simulation can require a longer time to set up. In these examples, ASE is the force provider, and I am using the [MACE-MP-0](https://github.com/ACEsuit/mace-mp) potential. However, you can use any potential by replacing the calculator in the run-ase.py file. 
 
-Ensure you have sourced the `env.sh` file in the i-PI directory
+```python
+atoms.calc = mace_mp(device='cpu') # Replace this with your preferred calculator 
+```
+
+Check out [i-PI's README]() on installation instructions. If you want to install the last version
+```bash
+pip install git+https://github.com/i-pi/i-pi.git
+```
+
+If you have git cloned the i-PI source directory, please ensure you source the `env.sh` file in the i-PI directory
 ```bash
 source ${IPI_ROOT_DIRECTORY}/env.sh
 ```
+to have access to executables.
 
 and you have `ase` and `mace` available in your Python environment. If you don't have that, an easy way is to
 ```bash
@@ -36,7 +46,7 @@ pip install mace-torch
 
 ### Contact
 
-If you encounter any problems, you are welcome to contact me at [v.kapil@ucl.ac.uk](v.kapil@ucl.ac.uk) or raise an issue on GitHub. Feel free to suggest use cases that are not covered here. 
+If you encounter any problems, you are welcome to contact me at [v.kapil@ucl.ac.uk](v.kapil@ucl.ac.uk) or raise an issue on GitHub. I strongly encourage you to go through the [troubleshooting section of i-PI's online documentation](https://ipi-code.org/i-pi/troubleshooting.html) beforehand, as it should address the majority of your problems. Feel free to suggest examples or use cases that are not covered here. 
 
 
 
