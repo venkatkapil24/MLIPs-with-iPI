@@ -26,5 +26,8 @@
         <timestep units='femtosecond'> 0.50 </timestep>
       </dynamics>
     </motion>
+    <ensemble>
+      <temperature units='kelvin'> 300 </temperature>
+    </ensemble>
   </system>
 </simulation>

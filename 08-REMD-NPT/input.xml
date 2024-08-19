@@ -44,7 +44,8 @@
           </motion>
           <ensemble>
             <temperature units='kelvin'> TEMP </temperature>
-          </ensemble>
+	    <pressure units='bar'> 1.0 </pressure>
+    	  </ensemble>
         </system>
      </template>
    </system_template>
