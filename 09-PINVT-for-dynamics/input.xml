@@ -1,0 +1,40 @@
+<simulation verbosity='high'>
+  <output prefix='simulation'>
+    <!-- Select the properties and trajectories of your liking. If you want the same units as in ASE, just specify  {ase}. -->  
+    <properties filename='out' stride='200'>  [ step, time{picosecond}, conserved{electronvolt}, temperature{kelvin}, kinetic_cv{electronvolt}, potential{electronvolt}, pressure_cv{megapascal} ] </properties>
+    <trajectory filename='pos' stride='200' format='ase'> positions </trajectory>
+    <checkpoint stride='2000'/>
+  </output>
+  <total_steps>20000</total_steps>
+  <prng>
+    <seed>31415</seed>
+  </prng>
+  <ffsocket name='driver' mode='unix' pbc='False'>
+      <address> driver </address>
+  </ffsocket>
+  <system>
+    <!-- A good rule of thumb for is nbeads > (hbar omega_max) / (kB T) where omega_max is the highest physical frequency in the system -->
+    <!-- For water omega_max ~ 3800 invcm this number is ~ 18 at 300 K. So a safe choice is 32 replicas  -->
+    <initialize nbeads='32'>
+      <file mode='ase'> init.xyz </file>
+      <velocities mode='thermal' units='kelvin'> 300 </velocities>
+    </initialize>
+    <forces>
+      <force forcefield='driver'> </force>
+    </forces>
+    <motion mode='dynamics'>
+      <dynamics mode='nvt' splitting='baoab'>
+        <!-- A reasonable range for tau for getting dynamical properites with some ergodicity is between 100 to 1000 fs  --> 
+         <thermostat mode='pile_g'> 
+	   <pile_lambda units='femtosecond'> 0.5 </pile_lambda> 
+	   <tau units='femtosecond'> 100 </tau> 
+	 </thermostat>
+        <!-- Change as per your system  --> 
+        <timestep units='femtosecond'> 0.50 </timestep>
+      </dynamics>
+    </motion>
+    <ensemble>
+      <temperature units='kelvin'> 300 </temperature>
+    </ensemble>
+  </system>
+</simulation>
