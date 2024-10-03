@@ -23,7 +23,17 @@ i-pi input.xml &> log.i-pi &
 sleep 30
 python run-ase.py
 ```
-For most simulations, you can reduce the sleep time to 10 seconds. However, a REMD simulation can require a longer time to set up. In these examples, ASE is the force provider, and I am using the [MACE-MP-0](https://github.com/ACEsuit/mace-mp) potential. However, you can use any potential by replacing the calculator in the run-ase.py file. 
+For most simulations, you can reduce the sleep time to 10 seconds. However, a REMD simulation can require a longer time to set up. For REMD and PIMD simulations, you can run the force provider code multiple times (ideally equal to the number of replicas being simulated). E.g. for 8 REMD conditions or 8 replicas, the user can run
+```bash
+i-pi input.xml &> log.i-pi &
+sleep 30
+for x in {1..8}
+do
+python run-ase.py & 
+done
+```
+
+In these examples, ASE is the force provider, and I am using the [MACE-MP-0](https://github.com/ACEsuit/mace-mp) potential. However, you can use any potential by replacing the calculator in the run-ase.py file. 
 
 ```python
 atoms.calc = mace_mp() # Replace this with your preferred calculator 
