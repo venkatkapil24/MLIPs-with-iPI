@@ -12,7 +12,7 @@ Here are a few examples of running basic simulations with i-PI v3.0. You are wel
 | `06-flexible-MTTK`     | Constant temperature and pressure simulation with flexible cell fluctuations using the Martyna-Tuckerman-Tobias-Klein scheme. | Simulating solids as they can be anisotropic in their response to pressure.                                |
 | `07-REMD-NVT`          | Replica exchange simulation at constant temperature.                                                        | Obtaining statistics for many temperatures, improving sampling efficiency.                  |
 | `08-REMD-NPT`          | Replica exchange simulation at constant temperature and pressure.                                           | Efficiently simulating an isobar.                                                           |
-| `09-REPIMD-NVT-for-dynamics`          | Constant temperature quantum ensemble with weak thermostatting on the centroid and efficient thermostatting on non-centroid mode.                                           | Recommended for calculating quantum dynamical properties approximately within the thermostatted ring polymer molecular dynamics.                                                           |
+| `09-REPIMD-NVT-for-dynamics`          | Constant temperature quantum ensemble with a weak thermostat on the centroid and efficient thermostat on non-centroid modes.                                           | Recommended for calculating quantum dynamical properties approximately using the thermostatted ring polymer molecular dynamics approach.                                                           |
 
 
 ## How to run
